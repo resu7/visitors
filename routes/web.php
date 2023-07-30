@@ -1,18 +1,16 @@
 <?php
 
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// トップ画面
+Route::get('/', [VisitorController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// 入室・退出処理
+Route::post('/check-in', [VisitorController::class, 'checkIn']);
+Route::post('/check-out', [VisitorController::class, 'checkOut']);
+
+// 管理画面（認証不要）
+Route::get('/admin', [VisitorController::class, 'admin']);
+Route::delete('/admin/{id}', [VisitorController::class, 'deleteRecord']);
+
